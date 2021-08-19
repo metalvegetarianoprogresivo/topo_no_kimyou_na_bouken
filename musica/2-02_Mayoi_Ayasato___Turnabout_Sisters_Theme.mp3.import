@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/2-02_Mayoi_Ayasato___Turnabout_Sisters_Theme.mp3-5a79193d48b99dd9567fba25101f909f.mp3str"
+
+[deps]
+
+source_file="res://musica/2-02_Mayoi_Ayasato___Turnabout_Sisters_Theme.mp3"
+dest_files=[ "res://.import/2-02_Mayoi_Ayasato___Turnabout_Sisters_Theme.mp3-5a79193d48b99dd9567fba25101f909f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

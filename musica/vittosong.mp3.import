@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/vittosong.mp3-8c4ce795ce4b44509384b23ff35a8a8e.mp3str"
+
+[deps]
+
+source_file="res://musica/vittosong.mp3"
+dest_files=[ "res://.import/vittosong.mp3-8c4ce795ce4b44509384b23ff35a8a8e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

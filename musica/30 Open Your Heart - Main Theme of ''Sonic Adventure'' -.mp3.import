@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/30 Open Your Heart - Main Theme of ''Sonic Adventure'' -.mp3-b90c829643d1c5f2807b7995c2a24fc7.mp3str"
+
+[deps]
+
+source_file="res://musica/30 Open Your Heart - Main Theme of ''Sonic Adventure'' -.mp3"
+dest_files=[ "res://.import/30 Open Your Heart - Main Theme of ''Sonic Adventure'' -.mp3-b90c829643d1c5f2807b7995c2a24fc7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

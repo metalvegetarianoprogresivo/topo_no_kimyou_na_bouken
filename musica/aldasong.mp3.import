@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/aldasong.mp3-cf57e12d5a6309bbaea6929e5f84846d.mp3str"
+
+[deps]
+
+source_file="res://musica/aldasong.mp3"
+dest_files=[ "res://.import/aldasong.mp3-cf57e12d5a6309bbaea6929e5f84846d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

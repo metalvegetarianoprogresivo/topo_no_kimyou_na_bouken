@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/topo_kimyou_na_bouken.wav-e3b8d43fd7841965450ce03a14d2a09b.sample"
+
+[deps]
+
+source_file="res://musica/topo_kimyou_na_bouken.wav"
+dest_files=[ "res://.import/topo_kimyou_na_bouken.wav-e3b8d43fd7841965450ce03a14d2a09b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

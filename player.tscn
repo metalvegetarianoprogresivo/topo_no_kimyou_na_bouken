@@ -1,0 +1,268 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Sprites/top8_Sprite.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/top8_Sprite3.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/top8_Sprite2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/top8_Sprite4.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/top8_Sprite_salto.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/top8_Sprite_salto2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/top8_Sprite_caida.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/top8_Sprite_caminar1.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/top8_Sprite_caminar16.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/top8_Sprite_caminar3.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/top8_Sprite_caminar2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/top8_Sprite_caminar7.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/top8_Sprite_caminar12.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/top8_Sprite_caminar15.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/top8_Sprite_caminar17.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/top8_Sprite_caminar4.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/top8_Sprite_caminar8.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/top8_Sprite_caminar6.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/top8_Sprite_caminar9.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/top8_Sprite_caminar10.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/top8_Sprite_caminar14.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/top8_Sprite_caminar5.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/top8_Sprite_caminar11.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/top8_Sprite_caminar13.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/.top8_Sprite_disparar.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/top8_Sprite_golpeado.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/top8_Sprite_golpeado2.png" type="Texture" id=27]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+onready var bala = preload(\"res://balajugador.tscn\")
+onready var bala2 = preload(\"res://balajugador2.tscn\")
+
+var mover = Vector2()
+const SALTO = Vector2(0, -1)
+const GRAVEDAD = 20
+const VEL = 300
+const ALTURA_SALTO = -600
+const saltoAlto = -400
+var b
+var c
+var disparando = 0
+signal cambiovida(new_value)
+signal player_is_dead
+export var vida: = 100
+var stun = false
+var doble_salto = 2
+var cuentasalto = 0
+var direccion = true
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+func _physics_process(_delta):
+	moverse()
+	puntosvida()
+	piso()
+
+#afecta la gravedad al player
+func piso():
+	pass
+#se elige la animacion que se va a reproducir
+func animacion():
+	var anima
+	if is_on_floor():
+		if abs(mover.x) > 0.1:
+			#animacion corriendo
+			anima = \"correr\"
+		else:
+			#animacion parado
+			anima = \"parado\"
+	else:
+		#animacion cayendo
+		if mover.y > 0:
+			anima = \"cayendo\"
+		else:
+			#animacion saltando
+			anima = \"salto\"
+	if disparando == 1:
+		anima = \"disparo\"
+		disparando = 0
+	
+	if stun == true:
+			anima = \"golpe\"
+	return anima
+	#funcion que mueve al personaje
+func moverse():
+	mover.y += GRAVEDAD
+	
+	if stun == false:
+		if Input.is_action_pressed(\"ui_right\"):
+			mover.x = VEL
+			direccion = true
+			$AnimatedSprite.flip_h = false
+			#$AnimatedSprite.animation = \"correr\"
+		elif Input.is_action_pressed(\"ui_left\"):
+			mover.x = -VEL
+			direccion = false
+			$AnimatedSprite.flip_h = true
+			#$AnimatedSprite.animation = \"correr\"
+		else:
+			#$AnimatedSprite.animation = \"parado\"
+			mover.x = 0
+		
+		if Input.is_action_just_pressed(\"shoot\"):
+			
+			
+			if direccion == true:
+					
+				b = bala.instance()
+				get_parent().add_child(b)
+				b.global_position = $bala1.global_position
+				disparando = 1
+
+			else:
+				c = bala2.instance()
+				get_parent().add_child(c)
+				c.global_position = $bala2.global_position
+				disparando = 1
+
+		
+		if is_on_floor():
+			cuentasalto = 0
+			
+		if doble_salto > cuentasalto and Input.is_action_just_pressed(\"salto\"):
+			#$AnimatedSprite.animation = \"parado\"
+			mover.y = ALTURA_SALTO
+			cuentasalto += 1
+		
+		
+					
+	mover = move_and_slide(mover, SALTO)
+	$AnimatedSprite.animation = animacion()
+	$AnimatedSprite.play()
+	pass
+
+
+#se modifica la vida
+func puntosvida():
+	if Input.is_action_just_pressed(\"ui_end\"):
+		self.vida += 20
+		emit_signal(\"cambiovida\", vida)
+#se emite la señal para modificar la vida
+#func _set_healt(new_value : int):
+	#emit_signal(\"cambiovida\", vida)
+
+
+
+
+#CUANDO PLAYER entra en contacto con el enemogo
+func _on_Area2D_area_entered(area):
+	print(area)
+	stun = true
+	self.vida -= 19
+	emit_signal(\"cambiovida\", vida)
+	modulate = Color.red
+	if vida >= 1:
+
+		if $AnimatedSprite.flip_h == false:
+			print(mover.x)
+			mover.x = -VEL * 2
+			#mover.y = ALTURA_SALTO
+			print(mover.x)
+		else:
+			mover.x = +VEL * 2
+			#mover.y = ALTURA_SALTO
+		#move_and_slide(mover, SALTO)
+		$stun.start()
+	else:
+		muerto()
+		
+func muerto():
+	emit_signal(\"player_is_dead\")
+	print(\"muerto\")
+	queue_free()
+
+
+func _on_stun_timeout():
+	stun = false
+	modulate = Color(\"ffffff\")
+
+
+
+"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "correr",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "cayendo",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "disparo",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "golpe",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "parado",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "salto",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 24.1083
+height = 101.089
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 15.0125, 69.0717 )
+
+[node name="topo" type="KinematicBody2D"]
+position = Vector2( 68.8032, 425.285 )
+collision_mask = 8
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.05, 0.05 )
+frames = SubResource( 2 )
+animation = "golpe"
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"danio",
+]]
+priority = 1.0
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2.47487, 0.353546 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3.10702, -0.773468 )
+shape = SubResource( 4 )
+
+[node name="bala1" type="Position2D" parent="."]
+position = Vector2( 44.8536, -32.6109 )
+
+[node name="stun" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="bala2" type="Position2D" parent="."]
+position = Vector2( -41.4268, -35.1905 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="stun" to="." method="_on_stun_timeout"]

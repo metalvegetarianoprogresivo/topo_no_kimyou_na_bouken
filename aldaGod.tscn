@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/aldagod.png" type="Texture" id=1]
+[ext_resource path="res://aldaGod.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 48, 112 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 24.0
+height = 192.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 12.9782, 115.015 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+position = Vector2( 64, 128 )
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 2 )
+
+[node name="colision" type="RayCast2D" parent="."]
+modulate = Color( 0, 0.00784314, 0.47451, 1 )
+position = Vector2( -39.8879, -3.81497 )
+rotation = 1.57079
+enabled = true
+collision_mask = 8
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 1 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 8, 0 )
+shape = SubResource( 3 )
+
+[node name="defensa" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="defensa"]
+position = Vector2( -28.9782, -1.25992 )
+shape = SubResource( 4 )
+
+[node name="saltar" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="ataca" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="bala" type="Position2D" parent="."]
+position = Vector2( -64, 80 )
+
+[node name="contraatacar" type="Position2D" parent="."]
+position = Vector2( 56, 40 )
+
+[node name="bala2" type="Position2D" parent="."]
+position = Vector2( -64, 0 )
+
+[node name="stun" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="defensa" to="." method="_on_defensa_area_entered"]
+[connection signal="timeout" from="saltar" to="." method="_on_saltar_timeout"]
+[connection signal="timeout" from="ataca" to="." method="_on_ataca_timeout"]
+[connection signal="timeout" from="stun" to="." method="_on_stun_timeout"]

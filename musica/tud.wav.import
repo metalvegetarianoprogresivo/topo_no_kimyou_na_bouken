@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tud.wav-260da014d5967129111bce6bed698a68.sample"
+
+[deps]
+
+source_file="res://musica/tud.wav"
+dest_files=[ "res://.import/tud.wav-260da014d5967129111bce6bed698a68.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

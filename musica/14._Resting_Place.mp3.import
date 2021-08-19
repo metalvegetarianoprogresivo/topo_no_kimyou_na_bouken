@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/14._Resting_Place.mp3-f921d6e4bcd37ae9b1c744177f8c968d.mp3str"
+
+[deps]
+
+source_file="res://musica/14._Resting_Place.mp3"
+dest_files=[ "res://.import/14._Resting_Place.mp3-f921d6e4bcd37ae9b1c744177f8c968d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

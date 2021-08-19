@@ -1,0 +1,148 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Sprites/aldagod_cara.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/vitto.png" type="Texture" id=2]
+[ext_resource path="res://bala2topo.gd" type="Script" id=3]
+[ext_resource path="res://bala3topo.gd" type="Script" id=4]
+[ext_resource path="res://bala4topo.gd" type="Script" id=5]
+[ext_resource path="res://balatopo.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/diegocabezadehuevo2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/balaPony.png" type="Texture" id=8]
+[ext_resource path="res://balatopo5.gd" type="Script" id=9]
+[ext_resource path="res://balatopo6.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/topoboss.png" type="Texture" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.0222, 16.5956 )
+
+[node name="balas" type="Node2D"]
+position = Vector2( 599.393, 313.358 )
+
+[node name="balatopo" type="Area2D" parent="."]
+position = Vector2( -22.6359, 7.86846 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="balatopo"]
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="balatopo"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="balatopo"]
+
+[node name="bala2topo" type="Area2D" parent="."]
+position = Vector2( 24.5152, 5.13127 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="bala2topo"]
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bala2topo"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="bala2topo"]
+
+[node name="bala3topo" type="Area2D" parent="."]
+position = Vector2( 0.943878, 39.8402 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="bala3topo"]
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bala3topo"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="bala3topo"]
+
+[node name="bala4topo" type="Area2D" parent="."]
+position = Vector2( -2.28416, -23.9499 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="bala4topo"]
+position = Vector2( 1.65649, -1.3056 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bala4topo"]
+position = Vector2( 2.41093, -1.02406 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="bala4topo"]
+
+[node name="balatopo5" type="Area2D" parent="."]
+position = Vector2( -35.2842, 45.0501 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="balatopo5"]
+position = Vector2( 1.65649, -1.3056 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="balatopo5"]
+position = Vector2( 2.41093, -1.02406 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="balatopo5"]
+
+[node name="balatopo6" type="Area2D" parent="."]
+position = Vector2( 34.7158, 45.0501 )
+collision_layer = 16
+collision_mask = 5
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="balatopo6"]
+position = Vector2( 1.65649, -1.3056 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 11 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="balatopo6"]
+position = Vector2( 2.41093, -1.02406 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="balatopo6"]
+
+[connection signal="area_entered" from="balatopo" to="balatopo" method="_on_balatopo_area_entered"]
+[connection signal="screen_exited" from="balatopo/VisibilityNotifier2D" to="balatopo" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="bala2topo" to="bala2topo" method="_on_bala2topo_area_entered"]
+[connection signal="screen_exited" from="bala2topo/VisibilityNotifier2D" to="bala2topo" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="bala3topo" to="bala3topo" method="_on_bala3topo_area_entered"]
+[connection signal="screen_exited" from="bala3topo/VisibilityNotifier2D" to="bala3topo" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_exited" from="bala4topo" to="bala4topo" method="_on_bala4topo_area_exited"]
+[connection signal="screen_exited" from="bala4topo/VisibilityNotifier2D" to="bala4topo" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="balatopo5" to="balatopo5" method="_on_balatopo5_area_entered"]
+[connection signal="screen_exited" from="balatopo5/VisibilityNotifier2D" to="balatopo5" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="balatopo6" to="balatopo6" method="_on_balatopo6_area_entered"]
+[connection signal="screen_exited" from="balatopo6/VisibilityNotifier2D" to="balatopo6" method="_on_VisibilityNotifier2D_screen_exited"]

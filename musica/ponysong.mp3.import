@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ponysong.mp3-c156b22af63f4e7f4d479d074bbea445.mp3str"
+
+[deps]
+
+source_file="res://musica/ponysong.mp3"
+dest_files=[ "res://.import/ponysong.mp3-c156b22af63f4e7f4d479d074bbea445.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
